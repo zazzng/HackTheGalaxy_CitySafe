@@ -1,0 +1,32 @@
+[
+  {
+    "rank": 1,
+    "zone": "LOWER MAINLAND",
+    "crashes": 888374,
+    "percentage": 64.4
+  },
+  {
+    "rank": 2,
+    "zone": "SOUTHERN INTERIOR",
+    "crashes": 199102,
+    "percentage": 14.4
+  },
+  {
+    "rank": 3,
+    "zone": "VANCOUVER ISLAND",
+    "crashes": 192693,
+    "percentage": 14.0
+  },
+  {
+    "rank": 4,
+    "zone": "NORTH CENTRAL",
+    "crashes": 79774,
+    "percentage": 5.8
+  },
+  {
+    "rank": 5,
+    "zone": "UNKNOWN",
+    "crashes": 20531,
+    "percentage": 1.5
+  }
+]

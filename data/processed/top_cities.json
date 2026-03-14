@@ -1,0 +1,62 @@
+[
+  {
+    "rank": 1,
+    "city": "VANCOUVER",
+    "crashes": 225148,
+    "percentage": 16.3
+  },
+  {
+    "rank": 2,
+    "city": "SURREY",
+    "crashes": 158147,
+    "percentage": 11.5
+  },
+  {
+    "rank": 3,
+    "city": "BURNABY",
+    "crashes": 78600,
+    "percentage": 5.7
+  },
+  {
+    "rank": 4,
+    "city": "RICHMOND",
+    "crashes": 70160,
+    "percentage": 5.1
+  },
+  {
+    "rank": 5,
+    "city": "LANGLEY",
+    "crashes": 51766,
+    "percentage": 3.7
+  },
+  {
+    "rank": 6,
+    "city": "ABBOTSFORD",
+    "crashes": 45928,
+    "percentage": 3.3
+  },
+  {
+    "rank": 7,
+    "city": "KELOWNA",
+    "crashes": 44673,
+    "percentage": 3.2
+  },
+  {
+    "rank": 8,
+    "city": "VICTORIA",
+    "crashes": 41263,
+    "percentage": 3.0
+  },
+  {
+    "rank": 9,
+    "city": "NORTH VANCOUVER",
+    "crashes": 40384,
+    "percentage": 2.9
+  },
+  {
+    "rank": 10,
+    "city": "COQUITLAM",
+    "crashes": 37297,
+    "percentage": 2.7
+  }
+]

@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Driver Safety Warning - BC Heat Map</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 1rem;
+        }
+
+        .warning-container {
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+            max-width: 600px;
+            width: 100%;
+            padding: 2rem;
+            text-align: center;
+        }
+
+        .warning-header {
+            margin-bottom: 1.5rem;
+        }
+
+        .warning-header h1 {
+            color: #333;
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .warning-header p {
+            color: #666;
+            font-size: 1rem;
+        }
+
+        .location-button {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.3s, box-shadow 0.3s;
+            margin-bottom: 1.5rem;
+            width: 100%;
+        }
+
+        .location-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
+        }
+
+        .location-button:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .loading {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            color: #667eea;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+        }
+
+        .loading i {
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .warning-box {
+            background: #fff3cd;
+            border: 2px solid #ffc107;
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            text-align: left;
+            display: none;
+        }
+
+        .warning-box.critical {
+            background: #f8d7da;
+            border-color: #f5576c;
+        }
+
+        .warning-box.high {
+            background: #fff3cd;
+            border-color: #ffc107;
+        }
+
+        .warning-box.medium {
+            background: #d1ecf1;
+            border-color: #17a2b8;
+        }
+
+        .warning-box.low {
+            background: #d4edda;
+            border-color: #28a745;
+        }
+
+        .warning-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .warning-box.critical .warning-title {
+            color: #721c24;
+        }
+
+        .warning-box.high .warning-title {
+            color: #856404;
+        }
+
+        .warning-box.medium .warning-title {
+            color: #0c5460;
+        }
+
+        .warning-box.low .warning-title {
+            color: #155724;
+        }
+
+        .warning-text {
+            line-height: 1.6;
+            margin-bottom: 1rem;
+            font-size: 0.95rem;
+        }
+
+        .nearby-zones {
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 8px;
+            padding: 1rem;
+            margin-top: 1rem;
+        }
+
+        .nearby-zones h4 {
+            margin-bottom: 0.8rem;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .zone-item {
+            background: white;
+            padding: 0.8rem;
+            margin-bottom: 0.6rem;
+            border-radius: 5px;
+            font-size: 0.9rem;
+        }
+
+        .zone-name {
+            font-weight: 700;
+            color: #667eea;
+        }
+
+        .zone-distance {
+            color: #666;
+            font-size: 0.85rem;
+        }
+
+        .error-box {
+            background: #f8d7da;
+            border: 2px solid #f5576c;
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            color: #721c24;
+            text-align: left;
+            display: none;
+        }
+
+        .back-link {
+            display: inline-block;
+            color: #667eea;
+            text-decoration: none;
+            margin-top: 1.5rem;
+            font-weight: 600;
+            transition: color 0.3s;
+        }
+
+        .back-link:hover {
+            color: #764ba2;
+        }
+
+        .location-info {
+            background: #f8f9fa;
+            border-radius: 8px;
+            padding: 1rem;
+            margin-bottom: 1.5rem;
+            font-size: 0.9rem;
+            color: #666;
+            display: none;
+        }
+
+        .location-info.active {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <div class="warning-container">
+        <div class="warning-header">
+            <h1><i class="fas fa-exclamation-triangle"></i> Driver Safety Alert</h1>
+            <p>Real-time crash risk warnings powered by Gemini AI</p>
+        </div>
+
+        <button class="location-button" onclick="getLocation()">
+            <i class="fas fa-location-dot"></i> Start Location Tracking
+        </button>
+
+        <div class="loading" id="loading" style="display: none;">
+            <i class="fas fa-spinner"></i>
+            <span id="loadingText">Getting your location...</span>
+        </div>
+
+        <div class="location-info" id="locationInfo"></div>
+        <div class="error-box" id="errorBox"></div>
+        <div class="warning-box" id="warningBox"></div>
+
+        <a href="index.html" class="back-link"><i class="fas fa-arrow-left"></i> Back to Heat Map</a>
+    </div>
+
+    <script>
+        const BACKEND_URL = 'http://localhost:5000';
+        
+        async function getLocation() {
+            const button = event.target.closest('.location-button');
+            const loading = document.getElementById('loading');
+            const errorBox = document.getElementById('errorBox');
+            const locationInfo = document.getElementById('locationInfo');
+            
+            errorBox.style.display = 'none';
+            locationInfo.innerHTML = '';
+            
+            // Check if geolocation is available
+            if (!navigator.geolocation) {
+                showError('Geolocation is not supported by your browser.');
+                return;
+            }
+
+            button.disabled = true;
+            loading.style.display = 'flex';
+
+            navigator.geolocation.getCurrentPosition(
+                async (position) => {
+                    const latitude = position.coords.latitude;
+                    const longitude = position.coords.longitude;
+                    
+                    await analyzeLocation(latitude, longitude);
+                    button.disabled = false;
+                    loading.style.display = 'none';
+                },
+                (error) => {
+                    let errorMsg = 'Unable to get location. ';
+                    switch(error.code) {
+                        case error.PERMISSION_DENIED:
+                            errorMsg += 'Please enable location access in your browser.';
+                            break;
+                        case error.POSITION_UNAVAILABLE:
+                            errorMsg += 'Location information is unavailable.';
+                            break;
+                        case error.TIMEOUT:
+                            errorMsg += 'Location request timed out.';
+                            break;
+                        default:
+                            errorMsg += error.message;
+                    }
+                    showError(errorMsg);
+                    button.disabled = false;
+                    loading.style.display = 'none';
+                }
+            );
+        }
+
+        async function analyzeLocation(latitude, longitude) {
+            const loading = document.getElementById('loading');
+            const locationInfo = document.getElementById('locationInfo');
+            const warningBox = document.getElementById('warningBox');
+            const errorBox = document.getElementById('errorBox');
+
+            // Show location info
+            locationInfo.innerHTML = `<strong>Your Location:</strong> ${latitude.toFixed(4)}°N, ${Math.abs(longitude).toFixed(4)}°W`;
+            locationInfo.classList.add('active');
+
+            // Update loading text
+            document.getElementById('loadingText').textContent = 'Analyzing nearby crash risk...';
+            loading.style.display = 'flex';
+            warningBox.style.display = 'none';
+            errorBox.style.display = 'none';
+
+            try {
+                const response = await fetch(`${BACKEND_URL}/api/check-location`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        latitude: latitude,
+                        longitude: longitude
+                    })
+                });
+
+                const data = await response.json();
+
+                if (!response.ok) {
+                    showError(data.error || 'Failed to analyze location');
+                    return;
+                }
+
+                // Display warning
+                displayWarning(data);
+            } catch (error) {
+                showError(`Connection error: ${error.message}. Make sure the warning server is running on port 5000.`);
+            } finally {
+                loading.style.display = 'none';
+            }
+        }
+
+        function displayWarning(data) {
+            const warningBox = document.getElementById('warningBox');
+            const riskLevel = data.risk_level || 'medium';
+
+            let riskIcon = '⚠️';
+            if (riskLevel === 'critical') riskIcon = '🚨';
+            else if (riskLevel === 'high') riskIcon = '⚠️';
+            else if (riskLevel === 'low') riskIcon = '✅';
+
+            let html = `
+                <div class="warning-title">
+                    <span>${riskIcon} ${riskLevel.toUpperCase()} RISK</span>
+                </div>
+                <div class="warning-text">
+                    ${data.warning}
+                </div>
+            `;
+
+            if (data.zones && data.zones.length > 0) {
+                html += '<div class="nearby-zones"><h4>Nearby High-Risk Zones</h4>';
+                data.zones.forEach(zone => {
+                    html += `
+                        <div class="zone-item">
+                            <div class="zone-name">${zone.zone}</div>
+                            <div class="zone-distance">
+                                ${zone.distance}km away • ${zone.crashes.toLocaleString()} crashes (${zone.percentage}%)
+                            </div>
+                        </div>
+                    `;
+                });
+                html += '</div>';
+            }
+
+            warningBox.innerHTML = html;
+            warningBox.className = `warning-box ${riskLevel}`;
+            warningBox.style.display = 'block';
+        }
+
+        function showError(message) {
+            const errorBox = document.getElementById('errorBox');
+            errorBox.innerHTML = `<strong>Error:</strong> ${message}`;
+            errorBox.style.display = 'block';
+        }
+
+        // Auto-start on page load
+        window.addEventListener('load', () => {
+            // Optionally auto-start location tracking
+            // getLocation();
+        });
+    </script>
+</body>
+</html>
