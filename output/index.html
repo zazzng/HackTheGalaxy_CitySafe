@@ -13,6 +13,15 @@
         <p>Interactive Analysis of ICBC Crash Data in British Columbia</p>
     </header>
 
+    <section class="quick-explorer">
+        <div class="explorer-title"><i class="fas fa-wand-magic-sparkles"></i> AI Navigator</div>
+        <div class="explorer-controls">
+            <input id="aiNavigatorInput" placeholder="Ask AI where to focus (e.g., 'show highest freeway risk area')" />
+            <button id="aiNavigatorBtn"><i class="fas fa-bolt"></i> AI Jump</button>
+        </div>
+        <div id="aiNavigatorResult" class="ai-navigator-result">AI Navigator ready.</div>
+    </section>
+
     <div class="main-container">
         <!-- Map Section -->
         <div class="section map-container">
@@ -33,12 +42,37 @@
                 <div id="topZonesContent" class="zones-grid"></div>
             </div>
         </div>
+
+        <!-- Top Streets Section -->
+        <div class="section top-streets-container">
+            <div class="section-title">
+                <i class="fas fa-road"></i> Top Crash Streets
+            </div>
+            <div class="section-content">
+                <div id="topStreetsContent" class="streets-list"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Button Links Section -->
+    <div style="max-width: 1600px; margin: 2rem auto; padding: 0 1rem;">
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem; margin-bottom: 2rem;">
+            <a href="interactive-warning.html" style="text-decoration: none;">
+                <div style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); color: white; padding: 2rem; border-radius: 10px; text-align: center; cursor: pointer; transition: all 0.3s; box-shadow: 0 4px 15px rgba(245, 87, 108, 0.2);" onmouseover="this.style.transform='translateY(-5px)'; this.style.boxShadow='0 8px 25px rgba(245, 87, 108, 0.4)';" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 15px rgba(245, 87, 108, 0.2)';">
+                    <div style="font-size: 2.5rem; margin-bottom: 0.5rem;"><i class="fas fa-crosshairs"></i></div>
+                    <div style="font-size: 1.2rem; font-weight: 700;">Interactive Cursor Warning</div>
+                    <div style="font-size: 0.9rem; opacity: 0.9; margin-top: 0.5rem;">Hover cursor on map to detect dangerous streets</div>
+                </div>
+            </a>
+        </div>
     </div>
 
     <footer>
         <p><strong>BC Heat Map</strong> - ICBC Crash Data Analysis</p>
         <p>Data Source: Insurance Corporation of British Columbia (ICBC)</p>
-        <p><a href="driver-warning.html" style="color: #ffc107; text-decoration: none;"><i class="fas fa-shield-alt"></i> Use Driver Safety Warning</a></p>
+        <p>
+            <a href="interactive-warning.html" style="color: #ffc107; text-decoration: none;"><i class="fas fa-crosshairs"></i> Interactive Cursor Warning</a>
+        </p>
         <p>&copy; 2026 HackTheGalaxy - CitySafe Project</p>
     </footer>
 

@@ -79,13 +79,6 @@ for zone_name, zone_info in zones.items():
         gradient={0.2: 'blue', 0.4: 'green', 0.6: 'yellow', 0.8: 'orange', 1.0: 'red'}
     ).add_to(zone_map)
     
-    # Add zone info marker at center
-    folium.Marker(
-        location=[zone_info['lat'], zone_info['lon']],
-        popup=f"<b>{zone_name}</b><br>{len(zone_data):,} crashes",
-        icon=folium.Icon(color='red', icon='info-sign')
-    ).add_to(zone_map)
-    
     # Save the map
     zone_slug = zone_name.lower().replace(' ', '-')
     output_file = os.path.join(output_dir, f'heatmap-{zone_slug}.html')

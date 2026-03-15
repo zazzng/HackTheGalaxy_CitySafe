@@ -1,0 +1,62 @@
+[
+  {
+    "rank": 1,
+    "street": "HWY 1",
+    "crashes": 34922,
+    "percentage": 2.53
+  },
+  {
+    "rank": 2,
+    "street": "HWY 97",
+    "crashes": 20931,
+    "percentage": 1.52
+  },
+  {
+    "rank": 3,
+    "street": "LOUGHEED HWY",
+    "crashes": 18746,
+    "percentage": 1.36
+  },
+  {
+    "rank": 4,
+    "street": "KINGSWAY",
+    "crashes": 16423,
+    "percentage": 1.19
+  },
+  {
+    "rank": 5,
+    "street": "UNKNOWN",
+    "crashes": 12221,
+    "percentage": 0.89
+  },
+  {
+    "rank": 6,
+    "street": "152 ST",
+    "crashes": 11621,
+    "percentage": 0.84
+  },
+  {
+    "rank": 7,
+    "street": "MAIN ST",
+    "crashes": 11097,
+    "percentage": 0.8
+  },
+  {
+    "rank": 8,
+    "street": "KING GEORGE BLVD",
+    "crashes": 10565,
+    "percentage": 0.77
+  },
+  {
+    "rank": 9,
+    "street": "FRASER HWY",
+    "crashes": 10508,
+    "percentage": 0.76
+  },
+  {
+    "rank": 10,
+    "street": "MARINE DR",
+    "crashes": 7856,
+    "percentage": 0.57
+  }
+]

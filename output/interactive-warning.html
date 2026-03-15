@@ -1,0 +1,757 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Driver Warning System</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #f0f2f5;
+        }
+
+        .container {
+            display: flex;
+            height: 100vh;
+            gap: 1rem;
+            padding: 1rem;
+        }
+
+        #map {
+            flex: 1;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            position: relative;
+            overflow: hidden;
+            cursor: grab;
+        }
+
+        #map:active {
+            cursor: grabbing;
+        }
+
+        #map:hover {
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .control-panel {
+            width: 350px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        .panel-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 1.5rem;
+            font-size: 1.2rem;
+            font-weight: 700;
+        }
+
+        .panel-content {
+            padding: 1.5rem;
+            flex: 1;
+            overflow-y: auto;
+        }
+
+        .back-button {
+            background: #667eea;
+            color: white;
+            border: none;
+            padding: 0.8rem 1.5rem;
+            border-radius: 8px;
+            font-size: 0.95rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin-bottom: 1.5rem;
+            width: calc(100% - 3rem);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+
+        .back-button:hover {
+            background: #764ba2;
+            transform: translateY(-2px);
+        }
+
+        .mode-button {
+            width: 100%;
+            padding: 1rem;
+            margin-bottom: 1.5rem;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+
+        .mode-button.inactive {
+            background: #667eea;
+            color: white;
+        }
+
+        .mode-button.inactive:hover {
+            background: #764ba2;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
+        }
+
+        .mode-button.active {
+            background: #28a745;
+            color: white;
+            animation: pulse 1.5s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { box-shadow: 0 0 0 0 rgba(40, 167, 69, 0.7); }
+            50% { box-shadow: 0 0 0 10px rgba(40, 167, 69, 0); }
+        }
+
+        .warning-box {
+            background: #fff3cd;
+            border-left: 4px solid #ffc107;
+            border-radius: 6px;
+            padding: 1rem;
+            margin-bottom: 1rem;
+            display: none;
+            animation: slideIn 0.3s ease;
+        }
+
+        .warning-box.active {
+            display: block;
+        }
+
+        .warning-box.critical {
+            background: #f8d7da;
+            border-left-color: #f5576c;
+        }
+
+        @keyframes slideIn {
+            from { transform: translateY(-10px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        .warning-title {
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .warning-box.critical .warning-title {
+            color: #721c24;
+        }
+
+        .warning-text {
+            font-size: 0.9rem;
+            line-height: 1.5;
+            color: #333;
+        }
+
+        .street-list {
+            background: #f8f9fa;
+            border-radius: 6px;
+            padding: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .street-list h4 {
+            font-size: 0.9rem;
+            color: #667eea;
+            margin-bottom: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .street-item {
+            background: white;
+            padding: 0.7rem;
+            margin-bottom: 0.5rem;
+            border-radius: 4px;
+            border-left: 3px solid #667eea;
+            font-size: 0.85rem;
+        }
+
+        .street-name {
+            font-weight: 600;
+            color: #333;
+        }
+
+        .street-distance {
+            color: #666;
+            font-size: 0.8rem;
+        }
+
+        .status-text {
+            color: #666;
+            font-size: 0.9rem;
+            text-align: center;
+            padding: 1rem;
+            background: #f0f2f5;
+            border-radius: 6px;
+        }
+
+        .status-text.active {
+            background: #d4edda;
+            color: #155724;
+            font-weight: 600;
+        }
+
+        .gemini-warning {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-radius: 6px;
+            padding: 1rem;
+            margin-top: 1rem;
+            font-size: 0.9rem;
+            line-height: 1.5;
+        }
+
+        .coordinates {
+            background: #f8f9fa;
+            border-radius: 6px;
+            padding: 0.8rem;
+            margin-bottom: 1rem;
+            font-size: 0.85rem;
+            color: #666;
+            font-family: monospace;
+        }
+
+        .loading {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: #667eea;
+        }
+
+        .loading i {
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        @media (max-width: 1024px) {
+            .container {
+                flex-direction: column;
+            }
+
+            .control-panel {
+                width: 100%;
+                height: 300px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div id="map" style="flex: 2; border-radius: 10px; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); position: relative; overflow: hidden;">
+            <!-- Map toggle buttons -->
+            <div style="position: absolute; top: 10px; left: 10px; z-index: 1000; display: flex; gap: 5px; pointer-events: auto;">
+                <button id="btn-markers" style="padding: 10px 14px; background: #ff6b6b; color: white; border: none; border-radius: 4px; cursor: pointer; font-weight: 700; font-size: 0.95rem; box-shadow: 0 3px 8px rgba(0,0,0,0.3); transition: all 0.2s; pointer-events: auto;">📍 Top 20 Hotspots</button>
+            </div>
+            
+            <!-- Heatmap will be loaded here via iframe for better crash visualization -->
+            <canvas id="radarCanvas" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 100; background: transparent; cursor: crosshair; pointer-events: none;"></canvas>
+            <iframe id="heatmapFrame" src="heatmap-markers.html" style="width: 100%; height: 100%; border: none; border-radius: 10px; display: block; pointer-events: auto; background: white;"></iframe>
+            <!-- Transparent overlay for cursor tracking - always on top but only active in warning mode -->
+            <div id="cursorOverlay" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 10; pointer-events: none; background: transparent; cursor: crosshair;"></div>
+        </div>
+        
+        <div class="control-panel">
+            <div class="panel-header">
+                <i class="fas fa-shield-alt"></i> Driver Warning System
+            </div>
+            
+            <div class="panel-content">
+                <button class="back-button" onclick="goBack()">
+                    <i class="fas fa-arrow-left"></i> Back to Heat Map
+                </button>
+
+                <button class="mode-button inactive" id="warningModeBtn" onclick="toggleWarningMode()">
+                    <i class="fas fa-location-crosshairs"></i>
+                    <span>Enable Warning Mode</span>
+                </button>
+
+                <div class="coordinates" id="coordinates" style="display: block; background: #e3f2fd; border-left: 4px solid #1976d2;">Hover over map to see coordinates...</div>
+
+                <div class="status-text" id="statusText">
+                    Click button above to activate location tracking
+                </div>
+
+                <div class="warning-box" id="warningBox">
+                    <div class="warning-title">
+                        <i class="fas fa-exclamation-triangle"></i>
+                        <span id="warningRiskLevel">WARNING</span>
+                    </div>
+                    <div class="warning-text" id="warningMessage"></div>
+                </div>
+
+                <div class="street-list" id="nearbyStreetsBox" style="display: none;">
+                    <h4><i class="fas fa-road"></i> Nearby Streets</h4>
+                    <div id="nearbyStreets"></div>
+                </div>
+
+                <div class="gemini-warning" id="geminiWarning" style="display: none;">
+                    <div class="loading" id="geminiLoading" style="display: flex; justify-content: center;">
+                        <i class="fas fa-spinner"></i>
+                        <span>Generating AI warning...</span>
+                    </div>
+                    <div id="geminiText" style="display: none;"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let warningModeActive = true;  // Always active by default
+        let currentMapMode = 'heat';  // 'heat' or 'markers'
+        let streetsData = [];
+        let currentCoordinates = null;
+        
+        // Initialize map mode buttons
+        document.addEventListener('DOMContentLoaded', function() {
+            // Always load top 20 markers mode
+            currentMapMode = 'markers';
+            const iframe = document.getElementById('heatmapFrame');
+            if (iframe) {
+                iframe.src = 'heatmap-markers.html';
+            }
+            console.log('Loaded: Top 20 Hotspots Mode');
+        });
+        
+        
+        // Loaded from output/hotspots.json to match marker map exactly.
+        let crashZones = [];
+
+        async function loadCrashZones() {
+            try {
+                const response = await fetch('hotspots.json?ts=' + Date.now());
+                if (!response.ok) {
+                    throw new Error('Failed to load hotspots.json: ' + response.status);
+                }
+                const hotspots = await response.json();
+                crashZones = hotspots.map(function(h) {
+                    return {
+                        name: h.name || h.city || ('Hotspot #' + h.rank),
+                        lat: Number(h.lat),
+                        lng: Number(h.lng),
+                        crashes: Number(h.crashes || 0),
+                        rank: Number(h.rank || 0)
+                    };
+                }).filter(function(h) {
+                    return Number.isFinite(h.lat) && Number.isFinite(h.lng) && h.crashes > 0;
+                });
+
+                console.log('Loaded hotspot data: ' + crashZones.length + ' zones');
+            } catch (err) {
+                console.error('Hotspot data load error:', err);
+                crashZones = [];
+            }
+        }
+
+        function goBack() {
+            window.location.href = 'index.html';
+        }
+
+        // Initialize map with cursor tracking
+        // Global bounds variable - sync with Folium map's actual viewport
+        let mapBounds = {north: 49.30, south: 49.04, east: -122.46, west: -123.19};
+        let leafletMap = null;
+        const RADAR_RADIUS_PX = 30;
+        const MARKER_BODY_OFFSET_Y_PX = 20;
+
+        function findLeafletMapInIframe() {
+            const iframe = document.getElementById('heatmapFrame');
+            if (!iframe || !iframe.contentWindow) return null;
+
+            const win = iframe.contentWindow;
+            const keys = Object.keys(win);
+            for (const key of keys) {
+                const obj = win[key];
+                if (
+                    obj &&
+                    typeof obj.getBounds === 'function' &&
+                    typeof obj.on === 'function' &&
+                    typeof obj.containerPointToLatLng === 'function'
+                ) {
+                    return obj;
+                }
+            }
+            return null;
+        }
+        
+        function getRealMapBounds() {
+            try {
+                if (!leafletMap) {
+                    leafletMap = findLeafletMapInIframe();
+                }
+
+                if (leafletMap) {
+                    const bounds = leafletMap.getBounds();
+                    if (bounds) {
+                        return {
+                            south: bounds.getSouth(),
+                            north: bounds.getNorth(),
+                            west: bounds.getWest(),
+                            east: bounds.getEast()
+                        };
+                    }
+                }
+            } catch (e) {
+                // CORS or other errors - will use fallback
+                console.log('Could not access iframe map bounds:', e.message);
+            }
+            
+            // Fallback: calculate from crash zones
+            let minLat = 90, maxLat = -90, minLng = 180, maxLng = -180;
+            for (const zone of crashZones) {
+                minLat = Math.min(minLat, zone.lat);
+                maxLat = Math.max(maxLat, zone.lat);
+                minLng = Math.min(minLng, zone.lng);
+                maxLng = Math.max(maxLng, zone.lng);
+            }
+            const latPadding = (maxLat - minLat) * 0.05;
+            const lngPadding = (maxLng - minLng) * 0.05;
+            return {
+                north: maxLat + latPadding,
+                south: minLat - latPadding,
+                east: maxLng + lngPadding,
+                west: minLng - lngPadding
+            };
+        }
+        
+        function calculateDynamicBounds() {
+            mapBounds = getRealMapBounds();
+            console.log('Updated bounds: N=' + mapBounds.north.toFixed(4) + ', S=' + mapBounds.south.toFixed(4) + ', E=' + mapBounds.east.toFixed(4) + ', W=' + mapBounds.west.toFixed(4));
+        }
+        
+        function initMap() {
+            const mapContainer = document.getElementById('map');
+            const canvas = document.getElementById('radarCanvas');
+            const iframe = document.getElementById('heatmapFrame');
+            
+            // Set canvas size to match map container
+            function resizeCanvas() {
+                canvas.width = mapContainer.clientWidth;
+                canvas.height = mapContainer.clientHeight;
+            }
+            resizeCanvas();
+            window.addEventListener('resize', resizeCanvas);
+            
+            // Initial bounds calculation
+            calculateDynamicBounds();
+
+            function drawRadarAt(x, y) {
+                const ctx = canvas.getContext('2d');
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                ctx.strokeStyle = 'rgba(255, 107, 107, 0.5)';
+                ctx.lineWidth = 2;
+                ctx.beginPath();
+                ctx.arc(x, y, RADAR_RADIUS_PX, 0, 2 * Math.PI);
+                ctx.stroke();
+                ctx.fillStyle = 'rgba(255, 107, 107, 0.1)';
+                ctx.fill();
+            }
+
+            function bindLeafletTracking() {
+                leafletMap = findLeafletMapInIframe();
+                if (!leafletMap) {
+                    console.log('Leaflet map not ready yet, retrying...');
+                    setTimeout(bindLeafletTracking, 300);
+                    return;
+                }
+
+                calculateDynamicBounds();
+
+                // Keep bounds synchronized with real viewport when user zooms/pans.
+                leafletMap.on('zoomend moveend', function() {
+                    calculateDynamicBounds();
+                });
+
+                leafletMap.on('mousemove', function(ev) {
+                    const lat = ev.latlng.lat;
+                    const lng = ev.latlng.lng;
+                    const point = ev.containerPoint || leafletMap.latLngToContainerPoint(ev.latlng);
+
+                    const coordsDisplay = document.getElementById('coordinates');
+                    coordsDisplay.textContent =
+                        'Cursor: LAT ' + lat.toFixed(5) +
+                        ' | LNG ' + lng.toFixed(5) +
+                        ' | Zoom: ' + leafletMap.getZoom() +
+                        ' | Bounds: N=' + mapBounds.north.toFixed(4) +
+                        ' S=' + mapBounds.south.toFixed(4) +
+                        ' E=' + mapBounds.east.toFixed(4) +
+                        ' W=' + mapBounds.west.toFixed(4);
+                    coordsDisplay.style.display = 'block';
+
+                    drawRadarAt(point.x, point.y);
+                    checkNearbyCrashes(lat, lng, point);
+                });
+
+                // Also detect on click so marker/popup interactions still trigger warning.
+                leafletMap.on('click', function(ev) {
+                    const lat = ev.latlng.lat;
+                    const lng = ev.latlng.lng;
+                    const point = ev.containerPoint || leafletMap.latLngToContainerPoint(ev.latlng);
+
+                    drawRadarAt(point.x, point.y);
+                    checkNearbyCrashes(lat, lng, point);
+                });
+
+                leafletMap.on('mouseout', function() {
+                    clearWarning();
+                    const ctx = canvas.getContext('2d');
+                    ctx.clearRect(0, 0, canvas.width, canvas.height);
+                });
+            }
+
+            if (iframe) {
+                iframe.addEventListener('load', bindLeafletTracking);
+                // If already loaded, bind immediately.
+                bindLeafletTracking();
+            }
+            
+            mapContainer.addEventListener('mouseleave', function() {
+                clearWarning();
+                var canvas = document.getElementById('radarCanvas');
+                if (canvas) {
+                    var ctx = canvas.getContext('2d');
+                    ctx.clearRect(0, 0, canvas.width, canvas.height);
+                }
+            });
+        }
+
+        // Initialize on load
+        window.addEventListener('load', async function() {
+            await loadCrashZones();
+
+            if (crashZones.length === 0) {
+                updateStatus('No hotspot data loaded. Run src/heatmap.py and refresh.');
+                return;
+            }
+
+            initMap();
+            console.log('PAGE LOADED - System Ready');
+            console.log('Crash zones: ' + crashZones.length);
+            console.log('WARNING MODE ACTIVE - Detection always on');
+            updateStatus('Detection Active - Hover over map to detect crash hotspots');
+            
+            // Set button to active state
+            const btn = document.getElementById('warningModeBtn');
+            if (btn) {
+                btn.classList.remove('inactive');
+                btn.classList.add('active');
+                btn.innerHTML = '<i class="fas fa-location-crosshairs"></i> <span>Detection Active</span>';
+            }
+        });
+
+        function toggleWarningMode() {
+            const btn = document.getElementById('warningModeBtn');
+            const overlay = document.getElementById('cursorOverlay');
+            
+            warningModeActive = !warningModeActive;
+            console.log('WARNING MODE TOGGLED: ' + warningModeActive);
+
+            if (warningModeActive) {
+                console.log('ENABLING WARNING MODE');
+                btn.classList.remove('inactive');
+                btn.classList.add('active');
+                btn.innerHTML = '<i class="fas fa-location-crosshairs"></i> <span>Warning Mode Active</span>';
+                updateStatus('Warning Mode Active - Move cursor to detect high-crash zones (you can still pan/zoom the map)');
+                document.getElementById('coordinates').style.display = 'block';
+                document.getElementById('statusText').classList.add('active');
+                
+                // Enable overlay for cursor tracking
+                overlay.style.pointerEvents = 'auto';
+                overlay.style.cursor = 'crosshair';
+            } else {
+                console.log('DISABLING WARNING MODE');
+                btn.classList.add('inactive');
+                btn.classList.remove('active');
+                btn.innerHTML = '<i class="fas fa-location-crosshairs"></i> <span>Enable Warning Mode</span>';
+                updateStatus('Click to activate cursor-based detection');
+                document.getElementById('coordinates').style.display = 'none';
+                document.getElementById('warningBox').classList.remove('active');
+                document.getElementById('nearbyStreetsBox').style.display = 'none';
+                document.getElementById('geminiWarning').style.display = 'none';
+                document.getElementById('statusText').classList.remove('active');
+                
+                // Disable overlay - events pass through to map
+                overlay.style.pointerEvents = 'none';
+                overlay.style.cursor = 'grab';
+                
+                clearWarning();
+            }
+        }
+
+        // Detect hotspots strictly inside the visible radar circle.
+        function checkNearbyCrashes(lat, lng, cursorPoint) {
+            let nearbyCrashes = [];
+
+            console.log('CHECK CRASHES at lat=' + lat + ', lng=' + lng);
+
+            if (!leafletMap || !cursorPoint) {
+                clearWarning();
+                return;
+            }
+
+            // Find hotspots only if marker tip/body is inside radar radius in pixels.
+            for (const zone of crashZones) {
+                const zonePoint = leafletMap.latLngToContainerPoint([zone.lat, zone.lng]);
+                const dxTip = zonePoint.x - cursorPoint.x;
+                const dyTip = zonePoint.y - cursorPoint.y;
+                const distanceToTip = Math.sqrt(dxTip * dxTip + dyTip * dyTip);
+
+                // Leaflet default pin anchor is near the tip, while users often hover the icon body.
+                const markerBodyY = zonePoint.y - MARKER_BODY_OFFSET_Y_PX;
+                const dxBody = zonePoint.x - cursorPoint.x;
+                const dyBody = markerBodyY - cursorPoint.y;
+                const distanceToBody = Math.sqrt(dxBody * dxBody + dyBody * dyBody);
+
+                const pixelDistance = Math.min(distanceToTip, distanceToBody);
+                const withinRadius = pixelDistance <= RADAR_RADIUS_PX;
+                
+                if (withinRadius) {
+                    console.log('FOUND CRASH ZONE IN RADAR: ' + zone.name + ' px=' + pixelDistance.toFixed(2));
+                    nearbyCrashes.push({
+                        ...zone,
+                        pixelDistance: pixelDistance
+                    });
+                }
+            }
+
+            nearbyCrashes.sort(function(a, b) {
+                return a.pixelDistance - b.pixelDistance;
+            });
+
+            if (nearbyCrashes.length > 0) {
+                console.log('DETECTED ' + nearbyCrashes.length + ' zones - showing warning');
+                showWarning(nearbyCrashes);
+                generateGeminiWarning(nearbyCrashes);
+            } else {
+                clearWarning();
+            }
+        }
+
+        // Show warning for crash zones
+        function showWarning(crashes) {
+            if (crashes.length === 0) {
+                clearWarning();
+                return;
+            }
+
+            console.log('SHOWWARNING: ' + crashes.length + ' zones detected');
+
+            const topCrash = crashes[0]; // Closest crash zone
+            const warningBox = document.getElementById('warningBox');
+            const nearbyStreetsBox = document.getElementById('nearbyStreetsBox');
+            
+            if (!warningBox) {
+                console.error('ERROR: warningBox element not found!');
+                return;
+            }
+            
+            console.log('Found warningBox element, displaying warning');
+            
+            // Show warning with friendly message
+            document.getElementById('warningRiskLevel').innerHTML = '<strong style="color: #d32f2f; font-size: 1.2rem;">HEY! DRIVE SAFE!</strong>';
+            document.getElementById('warningMessage').innerHTML = 
+                '<div style="font-size: 1.1rem; font-weight: bold; margin: 0.5rem 0;">' + topCrash.name + '</div>' +
+                '<div style="font-size: 0.95rem; color: #d32f2f;">' + topCrash.crashes.toLocaleString() + ' crashes reported here</div>' +
+                '<div style="font-size: 0.85rem; margin-top: 0.5rem; color: #666;">Stay alert in this area</div>';
+
+            // Force visible
+            warningBox.style.display = 'block';
+            warningBox.classList.add('active');
+            console.log('Warning box class added and set to display block');
+
+            // Show all nearby crash zones
+            const crashList = crashes.slice(0, 3).map(function(c) {
+                return '<div class="street-item"><div class="street-name">' + c.name + '</div><div class="street-distance">' + c.crashes.toLocaleString() + ' crashes</div></div>';
+            }).join('');
+
+            if (nearbyStreetsBox) {
+                document.getElementById('nearbyStreets').innerHTML = crashList;
+                nearbyStreetsBox.style.display = 'block';
+            }
+        }
+
+        // Clear warning
+        function clearWarning() {
+            const warningBox = document.getElementById('warningBox');
+            const nearbyStreetsBox = document.getElementById('nearbyStreetsBox');
+            const geminiWarning = document.getElementById('geminiWarning');
+            
+            if (warningBox) {
+                warningBox.classList.remove('active');
+                warningBox.style.display = 'none';
+            }
+            if (nearbyStreetsBox) {
+                nearbyStreetsBox.style.display = 'none';
+            }
+            if (geminiWarning) {
+                geminiWarning.style.display = 'none';
+            }
+        }
+
+        // Generate Gemini warning for crash zones
+        async function generateGeminiWarning(crashes) {
+            if (crashes.length === 0) return;
+
+            const geminiWarning = document.getElementById('geminiWarning');
+            const geminiText = document.getElementById('geminiText');
+            
+            if (!geminiWarning || !geminiText) {
+                console.log('Gemini warning elements not found');
+                return;
+            }
+
+            console.log('GENERATING SAFETY WARNING for ' + crashes.length + ' zones');
+            
+            // Show immediate safety message
+            geminiWarning.style.display = 'block';
+            const safetyMessages = [
+                'REDUCE SPEED - High crash zone detected',
+                'STAY ALERT - Multiple crashes reported here',
+                'INCREASE FOLLOWING DISTANCE - Dangerous area',
+                'AVOID DISTRACTIONS - Critical zone ahead',
+                'EXERCISE EXTREME CAUTION'
+            ];
+            const randomMessage = safetyMessages[Math.floor(Math.random() * safetyMessages.length)];
+            geminiText.innerHTML = '<strong style="color: #d32f2f;">SAFETY ACTION:</strong> ' + randomMessage;
+            geminiText.style.display = 'block';
+            console.log('Safety message displayed');
+        }
+
+        // Update status text
+        function updateStatus(text) {
+            document.getElementById('statusText').textContent = text;
+        }
+
+
+    </script>
+</body>
+</html>

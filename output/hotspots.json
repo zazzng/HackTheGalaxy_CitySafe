@@ -1,0 +1,162 @@
+[
+  {
+    "lat": 49.227644,
+    "lng": -122.997061,
+    "city": "Burnaby",
+    "name": "Burnaby",
+    "crashes": 1989,
+    "rank": 1
+  },
+  {
+    "lat": 49.134037,
+    "lng": -122.890359,
+    "city": "Surrey",
+    "name": "Surrey",
+    "crashes": 1547,
+    "rank": 2
+  },
+  {
+    "lat": 49.169782,
+    "lng": -122.949754,
+    "city": "Delta",
+    "name": "Delta",
+    "crashes": 1444,
+    "rank": 3
+  },
+  {
+    "lat": 49.191498,
+    "lng": -122.800899,
+    "city": "Surrey",
+    "name": "Surrey",
+    "crashes": 1360,
+    "rank": 4
+  },
+  {
+    "lat": 49.101818,
+    "lng": -122.4928,
+    "city": "Langley",
+    "name": "Langley",
+    "crashes": 1138,
+    "rank": 5
+  },
+  {
+    "lat": 49.258209,
+    "lng": -123.023636,
+    "city": "Vancouver",
+    "name": "Vancouver",
+    "crashes": 1136,
+    "rank": 6
+  },
+  {
+    "lat": 49.198601,
+    "lng": -123.077555,
+    "city": "Richmond",
+    "name": "Richmond",
+    "crashes": 1134,
+    "rank": 7
+  },
+  {
+    "lat": 49.133554,
+    "lng": -122.845583,
+    "city": "Surrey",
+    "name": "Surrey",
+    "crashes": 1116,
+    "rank": 8
+  },
+  {
+    "lat": 49.22589,
+    "lng": -122.817994,
+    "city": "Surrey",
+    "name": "Surrey",
+    "crashes": 1100,
+    "rank": 9
+  },
+  {
+    "lat": 49.165613,
+    "lng": -123.136632,
+    "city": "Richmond",
+    "name": "Richmond",
+    "crashes": 1090,
+    "rank": 10
+  },
+  {
+    "lat": 49.104433,
+    "lng": -122.801032,
+    "city": "Surrey",
+    "name": "Surrey",
+    "crashes": 1039,
+    "rank": 11
+  },
+  {
+    "lat": 49.162742,
+    "lng": -122.845798,
+    "city": "Surrey",
+    "name": "Surrey",
+    "crashes": 1028,
+    "rank": 12
+  },
+  {
+    "lat": 49.190089,
+    "lng": -122.800995,
+    "city": "Surrey",
+    "name": "Surrey",
+    "crashes": 1004,
+    "rank": 13
+  },
+  {
+    "lat": 49.277018,
+    "lng": -122.800008,
+    "city": "Coquitlam",
+    "name": "Coquitlam",
+    "crashes": 989,
+    "rank": 14
+  },
+  {
+    "lat": 49.192014,
+    "lng": -123.122024,
+    "city": "Richmond",
+    "name": "Richmond",
+    "crashes": 982,
+    "rank": 15
+  },
+  {
+    "lat": 49.140852,
+    "lng": -122.845634,
+    "city": "Surrey",
+    "name": "Surrey",
+    "crashes": 982,
+    "rank": 16
+  },
+  {
+    "lat": 49.276261,
+    "lng": -122.797294,
+    "city": "Coquitlam",
+    "name": "Coquitlam",
+    "crashes": 949,
+    "rank": 17
+  },
+  {
+    "lat": 49.32717,
+    "lng": -123.134922,
+    "city": "West Vancouver",
+    "name": "West Vancouver",
+    "crashes": 925,
+    "rank": 18
+  },
+  {
+    "lat": 49.1486,
+    "lng": -122.890378,
+    "city": "Surrey",
+    "name": "Surrey",
+    "crashes": 866,
+    "rank": 19
+  },
+  {
+    "lat": 49.166096,
+    "lng": -122.801369,
+    "city": "Surrey",
+    "name": "Surrey",
+    "crashes": 857,
+    "rank": 20
+  }
+]
