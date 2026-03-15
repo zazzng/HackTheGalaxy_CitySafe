@@ -14,37 +14,59 @@
 
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            min-height: 100vh;
+            background: #f0f2f5;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        .container {
             display: flex;
-            align-items: center;
-            justify-content: center;
+            height: 100vh;
+            gap: 1rem;
             padding: 1rem;
         }
 
+        #mapContainer {
+            flex: 1;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            overflow: hidden;
+            position: relative;
+        }
+
+        #heatmapMap {
+            width: 100%;
+            height: 100%;
+            border-radius: 10px;
+        }
+
         .warning-container {
+            width: 380px;
             background: white;
             border-radius: 15px;
             box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
-            max-width: 600px;
-            width: 100%;
             padding: 2rem;
             text-align: center;
+            display: flex;
+            flex-direction: column;
+            overflow-y: auto;
         }
 
         .warning-header {
             margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid #efefef;
         }
 
         .warning-header h1 {
             color: #333;
-            font-size: 2rem;
+            font-size: 1.5rem;
             margin-bottom: 0.5rem;
         }
 
         .warning-header p {
             color: #666;
-            font-size: 1rem;
+            font-size: 0.9rem;
         }
 
         .location-button {
@@ -53,7 +75,7 @@
             border: none;
             padding: 1rem 2rem;
             border-radius: 8px;
-            font-size: 1.1rem;
+            font-size: 1rem;
             font-weight: 600;
             cursor: pointer;
             transition: transform 0.3s, box-shadow 0.3s;
@@ -70,6 +92,29 @@
             opacity: 0.6;
             cursor: not-allowed;
             transform: none;
+        }
+
+        .back-button {
+            background: #667eea;
+            color: white;
+            border: none;
+            padding: 0.8rem 1.5rem;
+            border-radius: 8px;
+            font-size: 0.95rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin-bottom: 1.5rem;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+
+        .back-button:hover {
+            background: #764ba2;
+            transform: translateY(-2px);
         }
 
         .loading {
@@ -99,6 +144,8 @@
             margin-bottom: 1.5rem;
             text-align: left;
             display: none;
+            max-height: 300px;
+            overflow-y: auto;
         }
 
         .warning-box.critical {
@@ -122,7 +169,7 @@
         }
 
         .warning-title {
-            font-size: 1.3rem;
+            font-size: 1.2rem;
             font-weight: 700;
             margin-bottom: 1rem;
             display: flex;
@@ -149,7 +196,7 @@
         .warning-text {
             line-height: 1.6;
             margin-bottom: 1rem;
-            font-size: 0.95rem;
+            font-size: 0.9rem;
         }
 
         .nearby-zones {
@@ -161,17 +208,17 @@
 
         .nearby-zones h4 {
             margin-bottom: 0.8rem;
-            font-size: 0.9rem;
+            font-size: 0.85rem;
             text-transform: uppercase;
             letter-spacing: 1px;
         }
 
         .zone-item {
             background: white;
-            padding: 0.8rem;
-            margin-bottom: 0.6rem;
+            padding: 0.6rem;
+            margin-bottom: 0.5rem;
             border-radius: 5px;
-            font-size: 0.9rem;
+            font-size: 0.85rem;
         }
 
         .zone-name {
@@ -181,7 +228,7 @@
 
         .zone-distance {
             color: #666;
-            font-size: 0.85rem;
+            font-size: 0.8rem;
         }
 
         .error-box {
@@ -193,19 +240,6 @@
             color: #721c24;
             text-align: left;
             display: none;
-        }
-
-        .back-link {
-            display: inline-block;
-            color: #667eea;
-            text-decoration: none;
-            margin-top: 1.5rem;
-            font-weight: 600;
-            transition: color 0.3s;
-        }
-
-        .back-link:hover {
-            color: #764ba2;
         }
 
         .location-info {
@@ -221,33 +255,59 @@
         .location-info.active {
             display: block;
         }
+
+        @media (max-width: 1024px) {
+            .container {
+                flex-direction: column;
+            }
+
+            #mapContainer {
+                min-height: 300px;
+            }
+
+            .warning-container {
+                width: 100%;
+            }
+        }
     </style>
 </head>
 <body>
-    <div class="warning-container">
-        <div class="warning-header">
-            <h1><i class="fas fa-exclamation-triangle"></i> Driver Safety Alert</h1>
-            <p>Real-time crash risk warnings powered by Gemini AI</p>
+    <div class="container">
+        <div id="mapContainer">
+            <iframe id="heatmapMap" src="heatmap.html" style="border: none; width: 100%; height: 100%; border-radius: 10px; box-shadow: inset 0 2px 10px rgba(0,0,0,0.1); display: block; pointer-events: auto; background: white;"></iframe>
         </div>
 
-        <button class="location-button" onclick="getLocation()">
-            <i class="fas fa-location-dot"></i> Start Location Tracking
-        </button>
+        <div class="warning-container">
+            <button class="back-button" onclick="goBack()">
+                <i class="fas fa-arrow-left"></i> Back to Heat Map
+            </button>
 
-        <div class="loading" id="loading" style="display: none;">
-            <i class="fas fa-spinner"></i>
-            <span id="loadingText">Getting your location...</span>
+            <div class="warning-header">
+                <h1><i class="fas fa-exclamation-triangle"></i> Driver Alert</h1>
+                <p>Real-time crash risk warnings powered by Gemini AI</p>
+            </div>
+
+            <button class="location-button" onclick="getLocation()">
+                <i class="fas fa-location-dot"></i> Start Location Tracking
+            </button>
+
+            <div class="loading" id="loading" style="display: none;">
+                <i class="fas fa-spinner"></i>
+                <span id="loadingText">Getting your location...</span>
+            </div>
+
+            <div class="location-info" id="locationInfo"></div>
+            <div class="error-box" id="errorBox"></div>
+            <div class="warning-box" id="warningBox"></div>
         </div>
-
-        <div class="location-info" id="locationInfo"></div>
-        <div class="error-box" id="errorBox"></div>
-        <div class="warning-box" id="warningBox"></div>
-
-        <a href="index.html" class="back-link"><i class="fas fa-arrow-left"></i> Back to Heat Map</a>
     </div>
 
     <script>
         const BACKEND_URL = 'http://localhost:5000';
+
+        function goBack() {
+            window.location.href = 'index.html';
+        }
         
         async function getLocation() {
             const button = event.target.closest('.location-button');
@@ -336,7 +396,7 @@
                 // Display warning
                 displayWarning(data);
             } catch (error) {
-                showError(`Connection error: ${error.message}. Make sure the warning server is running on port 5000.`);
+                showError(`Connection error: ${error.message}. Make sure the API server is running on port 5000.`);
             } finally {
                 loading.style.display = 'none';
             }

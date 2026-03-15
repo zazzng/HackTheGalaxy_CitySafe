@@ -75,13 +75,6 @@ for city_info in top_cities_list:
         gradient={0.2: 'blue', 0.4: 'green', 0.6: 'yellow', 0.8: 'orange', 1.0: 'red'}
     ).add_to(city_map)
     
-    # Add city marker at center
-    folium.Marker(
-        location=[center_lat, center_lon],
-        popup=f"<b>{city_name}</b><br>{len(city_data):,} crashes",
-        icon=folium.Icon(color='darkblue', icon='info-sign', prefix='glyphicon')
-    ).add_to(city_map)
-    
     # Create URL-safe filename
     city_slug = city_name.lower().replace(' ', '-')
     output_file = os.path.join(output_dir, f'heatmap-city-{city_slug}.html')

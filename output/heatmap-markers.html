@@ -1,0 +1,1080 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    <script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.0/css/all.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/python-visualization/folium/folium/templates/leaflet.awesome.rotate.min.css"/>
+    
+            <meta name="viewport" content="width=device-width,
+                initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+            <style>
+                #map_34fee6293976af3e099df813a1a25375 {
+                    position: relative;
+                    width: 100.0%;
+                    height: 100.0%;
+                    left: 0.0%;
+                    top: 0.0%;
+                }
+                .leaflet-container { font-size: 1rem; }
+            </style>
+
+            <style>html, body {
+                width: 100%;
+                height: 100%;
+                margin: 0;
+                padding: 0;
+            }
+            </style>
+
+            <style>#map {
+                position:absolute;
+                top:0;
+                bottom:0;
+                right:0;
+                left:0;
+                }
+            </style>
+
+            <script>
+                L_NO_TOUCH = false;
+                L_DISABLE_3D = false;
+            </script>
+
+        
+</head>
+<body>
+    
+    
+            <div class="folium-map" id="map_34fee6293976af3e099df813a1a25375" ></div>
+        
+</body>
+<script>
+    
+    
+            var map_34fee6293976af3e099df813a1a25375 = L.map(
+                "map_34fee6293976af3e099df813a1a25375",
+                {
+                    center: [49.46318446750546, -122.60460180988787],
+                    crs: L.CRS.EPSG3857,
+                    ...{
+  "zoom": 9,
+  "zoomControl": true,
+  "preferCanvas": false,
+}
+
+                }
+            );
+
+            
+
+        
+    
+            var tile_layer_d58f736f8948654931ffc1d5ed6ba883 = L.tileLayer(
+                "https://tile.openstreetmap.org/{z}/{x}/{y}.png",
+                {
+  "minZoom": 0,
+  "maxZoom": 19,
+  "maxNativeZoom": 19,
+  "noWrap": false,
+  "attribution": "\u0026copy; \u003ca href=\"https://www.openstreetmap.org/copyright\"\u003eOpenStreetMap\u003c/a\u003e contributors",
+  "subdomains": "abc",
+  "detectRetina": false,
+  "tms": false,
+  "opacity": 1,
+}
+
+            );
+        
+    
+            tile_layer_d58f736f8948654931ffc1d5ed6ba883.addTo(map_34fee6293976af3e099df813a1a25375);
+        
+    
+            var marker_d1067b9fb0bed743d0269199497bca6b = L.marker(
+                [49.227644, -122.997061],
+                {
+}
+            ).addTo(map_34fee6293976af3e099df813a1a25375);
+        
+    
+            var icon_502710ceeb9758649a2124e11d5555a9 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "darkred",
+  "iconColor": "white",
+  "icon": "exclamation",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_3e874fd68c93b3dd2509f014233a9935 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_2594650b2c7c1560465b8f6e48a34aa3 = $(`<div id="html_2594650b2c7c1560465b8f6e48a34aa3" style="width: 100.0%; height: 100.0%;">     <div style="font-family: Arial; width: 250px;">         <h4 style="margin: 5px 0; color: #d32f2f;">🔴 Hotspot #1</h4>         <hr style="margin: 5px 0;">         <p style="margin: 3px 0;"><b>City:</b> Burnaby</p>         <p style="margin: 3px 0;"><b>Latitude:</b> <code style="background: #f0f0f0; padding: 2px 5px;">49.22764</code></p>         <p style="margin: 3px 0;"><b>Longitude:</b> <code style="background: #f0f0f0; padding: 2px 5px;">-122.99706</code></p>         <p style="margin: 3px 0;"><b>Crashes:</b> <b style="color: red;">1,989</b></p>     </div>     </div>`)[0];
+                popup_3e874fd68c93b3dd2509f014233a9935.setContent(html_2594650b2c7c1560465b8f6e48a34aa3);
+            
+        
+
+        marker_d1067b9fb0bed743d0269199497bca6b.bindPopup(popup_3e874fd68c93b3dd2509f014233a9935)
+        ;
+
+        
+    
+    
+            marker_d1067b9fb0bed743d0269199497bca6b.bindTooltip(
+                `<div>
+                     #1: Burnaby - 1989 crashes
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_d1067b9fb0bed743d0269199497bca6b.setIcon(icon_502710ceeb9758649a2124e11d5555a9);
+            
+    
+            var marker_9328bfb37c48b612a6ace157122570ec = L.marker(
+                [49.134037, -122.890359],
+                {
+}
+            ).addTo(map_34fee6293976af3e099df813a1a25375);
+        
+    
+            var icon_bc6560c4fb52bcc2ff9e4188134453d5 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "darkred",
+  "iconColor": "white",
+  "icon": "exclamation",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_b94683f4414b4f778ccd4c3784a3b17d = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_c828aaf13e419fdcf59a7478831916e2 = $(`<div id="html_c828aaf13e419fdcf59a7478831916e2" style="width: 100.0%; height: 100.0%;">     <div style="font-family: Arial; width: 250px;">         <h4 style="margin: 5px 0; color: #d32f2f;">🔴 Hotspot #2</h4>         <hr style="margin: 5px 0;">         <p style="margin: 3px 0;"><b>City:</b> Surrey</p>         <p style="margin: 3px 0;"><b>Latitude:</b> <code style="background: #f0f0f0; padding: 2px 5px;">49.13404</code></p>         <p style="margin: 3px 0;"><b>Longitude:</b> <code style="background: #f0f0f0; padding: 2px 5px;">-122.89036</code></p>         <p style="margin: 3px 0;"><b>Crashes:</b> <b style="color: red;">1,547</b></p>     </div>     </div>`)[0];
+                popup_b94683f4414b4f778ccd4c3784a3b17d.setContent(html_c828aaf13e419fdcf59a7478831916e2);
+            
+        
+
+        marker_9328bfb37c48b612a6ace157122570ec.bindPopup(popup_b94683f4414b4f778ccd4c3784a3b17d)
+        ;
+
+        
+    
+    
+            marker_9328bfb37c48b612a6ace157122570ec.bindTooltip(
+                `<div>
+                     #2: Surrey - 1547 crashes
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_9328bfb37c48b612a6ace157122570ec.setIcon(icon_bc6560c4fb52bcc2ff9e4188134453d5);
+            
+    
+            var marker_c19fda3d6030644d75e24a753218e24a = L.marker(
+                [49.169782, -122.949754],
+                {
+}
+            ).addTo(map_34fee6293976af3e099df813a1a25375);
+        
+    
+            var icon_b70769ddccb283337aea4af6be9b19ab = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "exclamation",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_f2f0030ce2e3016c9b15638108426831 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_c3ccd9027b6e19b12e3548d792c77b79 = $(`<div id="html_c3ccd9027b6e19b12e3548d792c77b79" style="width: 100.0%; height: 100.0%;">     <div style="font-family: Arial; width: 250px;">         <h4 style="margin: 5px 0; color: #d32f2f;">🔴 Hotspot #3</h4>         <hr style="margin: 5px 0;">         <p style="margin: 3px 0;"><b>City:</b> Delta</p>         <p style="margin: 3px 0;"><b>Latitude:</b> <code style="background: #f0f0f0; padding: 2px 5px;">49.16978</code></p>         <p style="margin: 3px 0;"><b>Longitude:</b> <code style="background: #f0f0f0; padding: 2px 5px;">-122.94975</code></p>         <p style="margin: 3px 0;"><b>Crashes:</b> <b style="color: red;">1,444</b></p>     </div>     </div>`)[0];
+                popup_f2f0030ce2e3016c9b15638108426831.setContent(html_c3ccd9027b6e19b12e3548d792c77b79);
+            
+        
+
+        marker_c19fda3d6030644d75e24a753218e24a.bindPopup(popup_f2f0030ce2e3016c9b15638108426831)
+        ;
+
+        
+    
+    
+            marker_c19fda3d6030644d75e24a753218e24a.bindTooltip(
+                `<div>
+                     #3: Delta - 1444 crashes
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_c19fda3d6030644d75e24a753218e24a.setIcon(icon_b70769ddccb283337aea4af6be9b19ab);
+            
+    
+            var marker_191b367bb7347594144455999dcf322c = L.marker(
+                [49.191498, -122.800899],
+                {
+}
+            ).addTo(map_34fee6293976af3e099df813a1a25375);
+        
+    
+            var icon_a2bd36f4df8e0baf54b54d2d046277ef = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "exclamation",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_0bdebf62d85585e5f38ba6b77644e542 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_d34a00311b199a4e034a757c2f04ed9a = $(`<div id="html_d34a00311b199a4e034a757c2f04ed9a" style="width: 100.0%; height: 100.0%;">     <div style="font-family: Arial; width: 250px;">         <h4 style="margin: 5px 0; color: #d32f2f;">🔴 Hotspot #4</h4>         <hr style="margin: 5px 0;">         <p style="margin: 3px 0;"><b>City:</b> Surrey</p>         <p style="margin: 3px 0;"><b>Latitude:</b> <code style="background: #f0f0f0; padding: 2px 5px;">49.19150</code></p>         <p style="margin: 3px 0;"><b>Longitude:</b> <code style="background: #f0f0f0; padding: 2px 5px;">-122.80090</code></p>         <p style="margin: 3px 0;"><b>Crashes:</b> <b style="color: red;">1,360</b></p>     </div>     </div>`)[0];
+                popup_0bdebf62d85585e5f38ba6b77644e542.setContent(html_d34a00311b199a4e034a757c2f04ed9a);
+            
+        
+
+        marker_191b367bb7347594144455999dcf322c.bindPopup(popup_0bdebf62d85585e5f38ba6b77644e542)
+        ;
+
+        
+    
+    
+            marker_191b367bb7347594144455999dcf322c.bindTooltip(
+                `<div>
+                     #4: Surrey - 1360 crashes
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_191b367bb7347594144455999dcf322c.setIcon(icon_a2bd36f4df8e0baf54b54d2d046277ef);
+            
+    
+            var marker_fb1526f4d70d2d9dc71f26d09871a488 = L.marker(
+                [49.101818, -122.4928],
+                {
+}
+            ).addTo(map_34fee6293976af3e099df813a1a25375);
+        
+    
+            var icon_7f8ad7bc885736df954cb8c143419e0d = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "exclamation",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_f827877b45afb24ae20172e29c6b3a53 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_827c00b5b66bb7d97e2d774b25f814a4 = $(`<div id="html_827c00b5b66bb7d97e2d774b25f814a4" style="width: 100.0%; height: 100.0%;">     <div style="font-family: Arial; width: 250px;">         <h4 style="margin: 5px 0; color: #d32f2f;">🔴 Hotspot #5</h4>         <hr style="margin: 5px 0;">         <p style="margin: 3px 0;"><b>City:</b> Langley</p>         <p style="margin: 3px 0;"><b>Latitude:</b> <code style="background: #f0f0f0; padding: 2px 5px;">49.10182</code></p>         <p style="margin: 3px 0;"><b>Longitude:</b> <code style="background: #f0f0f0; padding: 2px 5px;">-122.49280</code></p>         <p style="margin: 3px 0;"><b>Crashes:</b> <b style="color: red;">1,138</b></p>     </div>     </div>`)[0];
+                popup_f827877b45afb24ae20172e29c6b3a53.setContent(html_827c00b5b66bb7d97e2d774b25f814a4);
+            
+        
+
+        marker_fb1526f4d70d2d9dc71f26d09871a488.bindPopup(popup_f827877b45afb24ae20172e29c6b3a53)
+        ;
+
+        
+    
+    
+            marker_fb1526f4d70d2d9dc71f26d09871a488.bindTooltip(
+                `<div>
+                     #5: Langley - 1138 crashes
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_fb1526f4d70d2d9dc71f26d09871a488.setIcon(icon_7f8ad7bc885736df954cb8c143419e0d);
+            
+    
+            var marker_59f09b6bc1f87bf4d90cfef802263327 = L.marker(
+                [49.258209, -123.023636],
+                {
+}
+            ).addTo(map_34fee6293976af3e099df813a1a25375);
+        
+    
+            var icon_89cdc7b0d222295b6e81f2aacaef9c04 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "exclamation",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_7203e5bb4277c86d37d4b5f34e0060e4 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_05831632814ca649f482b3c9f3277397 = $(`<div id="html_05831632814ca649f482b3c9f3277397" style="width: 100.0%; height: 100.0%;">     <div style="font-family: Arial; width: 250px;">         <h4 style="margin: 5px 0; color: #d32f2f;">🔴 Hotspot #6</h4>         <hr style="margin: 5px 0;">         <p style="margin: 3px 0;"><b>City:</b> Vancouver</p>         <p style="margin: 3px 0;"><b>Latitude:</b> <code style="background: #f0f0f0; padding: 2px 5px;">49.25821</code></p>         <p style="margin: 3px 0;"><b>Longitude:</b> <code style="background: #f0f0f0; padding: 2px 5px;">-123.02364</code></p>         <p style="margin: 3px 0;"><b>Crashes:</b> <b style="color: red;">1,136</b></p>     </div>     </div>`)[0];
+                popup_7203e5bb4277c86d37d4b5f34e0060e4.setContent(html_05831632814ca649f482b3c9f3277397);
+            
+        
+
+        marker_59f09b6bc1f87bf4d90cfef802263327.bindPopup(popup_7203e5bb4277c86d37d4b5f34e0060e4)
+        ;
+
+        
+    
+    
+            marker_59f09b6bc1f87bf4d90cfef802263327.bindTooltip(
+                `<div>
+                     #6: Vancouver - 1136 crashes
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_59f09b6bc1f87bf4d90cfef802263327.setIcon(icon_89cdc7b0d222295b6e81f2aacaef9c04);
+            
+    
+            var marker_c648748f1a449c9fd938f34b64983f37 = L.marker(
+                [49.198601, -123.077555],
+                {
+}
+            ).addTo(map_34fee6293976af3e099df813a1a25375);
+        
+    
+            var icon_5a15c6c836b3fdff7f958e3ff3f506bb = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "exclamation",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_0f2d23a0346ee2d13e01524c82cb983c = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_9a9a89ae10b7464822535e690e057720 = $(`<div id="html_9a9a89ae10b7464822535e690e057720" style="width: 100.0%; height: 100.0%;">     <div style="font-family: Arial; width: 250px;">         <h4 style="margin: 5px 0; color: #d32f2f;">🔴 Hotspot #7</h4>         <hr style="margin: 5px 0;">         <p style="margin: 3px 0;"><b>City:</b> Richmond</p>         <p style="margin: 3px 0;"><b>Latitude:</b> <code style="background: #f0f0f0; padding: 2px 5px;">49.19860</code></p>         <p style="margin: 3px 0;"><b>Longitude:</b> <code style="background: #f0f0f0; padding: 2px 5px;">-123.07756</code></p>         <p style="margin: 3px 0;"><b>Crashes:</b> <b style="color: red;">1,134</b></p>     </div>     </div>`)[0];
+                popup_0f2d23a0346ee2d13e01524c82cb983c.setContent(html_9a9a89ae10b7464822535e690e057720);
+            
+        
+
+        marker_c648748f1a449c9fd938f34b64983f37.bindPopup(popup_0f2d23a0346ee2d13e01524c82cb983c)
+        ;
+
+        
+    
+    
+            marker_c648748f1a449c9fd938f34b64983f37.bindTooltip(
+                `<div>
+                     #7: Richmond - 1134 crashes
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_c648748f1a449c9fd938f34b64983f37.setIcon(icon_5a15c6c836b3fdff7f958e3ff3f506bb);
+            
+    
+            var marker_9f7448c530dae2cafc93e3b894457683 = L.marker(
+                [49.133554, -122.845583],
+                {
+}
+            ).addTo(map_34fee6293976af3e099df813a1a25375);
+        
+    
+            var icon_2a1a8da573fa7fc6440b9c8316319b3d = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "exclamation",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_79e75b59e3daa98cddf45a73862773b3 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_ec2937a2c7051c46b52f987ff2ba3904 = $(`<div id="html_ec2937a2c7051c46b52f987ff2ba3904" style="width: 100.0%; height: 100.0%;">     <div style="font-family: Arial; width: 250px;">         <h4 style="margin: 5px 0; color: #d32f2f;">🔴 Hotspot #8</h4>         <hr style="margin: 5px 0;">         <p style="margin: 3px 0;"><b>City:</b> Surrey</p>         <p style="margin: 3px 0;"><b>Latitude:</b> <code style="background: #f0f0f0; padding: 2px 5px;">49.13355</code></p>         <p style="margin: 3px 0;"><b>Longitude:</b> <code style="background: #f0f0f0; padding: 2px 5px;">-122.84558</code></p>         <p style="margin: 3px 0;"><b>Crashes:</b> <b style="color: red;">1,116</b></p>     </div>     </div>`)[0];
+                popup_79e75b59e3daa98cddf45a73862773b3.setContent(html_ec2937a2c7051c46b52f987ff2ba3904);
+            
+        
+
+        marker_9f7448c530dae2cafc93e3b894457683.bindPopup(popup_79e75b59e3daa98cddf45a73862773b3)
+        ;
+
+        
+    
+    
+            marker_9f7448c530dae2cafc93e3b894457683.bindTooltip(
+                `<div>
+                     #8: Surrey - 1116 crashes
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_9f7448c530dae2cafc93e3b894457683.setIcon(icon_2a1a8da573fa7fc6440b9c8316319b3d);
+            
+    
+            var marker_91cbd5b8f4c5362736e69b196933e065 = L.marker(
+                [49.22589, -122.817994],
+                {
+}
+            ).addTo(map_34fee6293976af3e099df813a1a25375);
+        
+    
+            var icon_1ec53ea3f581a65edd1508e7449e6617 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "exclamation",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_96a11b68a873e88cfe36c6df75c13dce = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_08ec3af7a0dd14839ea606088dbc295e = $(`<div id="html_08ec3af7a0dd14839ea606088dbc295e" style="width: 100.0%; height: 100.0%;">     <div style="font-family: Arial; width: 250px;">         <h4 style="margin: 5px 0; color: #d32f2f;">🔴 Hotspot #9</h4>         <hr style="margin: 5px 0;">         <p style="margin: 3px 0;"><b>City:</b> Surrey</p>         <p style="margin: 3px 0;"><b>Latitude:</b> <code style="background: #f0f0f0; padding: 2px 5px;">49.22589</code></p>         <p style="margin: 3px 0;"><b>Longitude:</b> <code style="background: #f0f0f0; padding: 2px 5px;">-122.81799</code></p>         <p style="margin: 3px 0;"><b>Crashes:</b> <b style="color: red;">1,100</b></p>     </div>     </div>`)[0];
+                popup_96a11b68a873e88cfe36c6df75c13dce.setContent(html_08ec3af7a0dd14839ea606088dbc295e);
+            
+        
+
+        marker_91cbd5b8f4c5362736e69b196933e065.bindPopup(popup_96a11b68a873e88cfe36c6df75c13dce)
+        ;
+
+        
+    
+    
+            marker_91cbd5b8f4c5362736e69b196933e065.bindTooltip(
+                `<div>
+                     #9: Surrey - 1100 crashes
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_91cbd5b8f4c5362736e69b196933e065.setIcon(icon_1ec53ea3f581a65edd1508e7449e6617);
+            
+    
+            var marker_3545edbb36ab6b79b943be9cd89cc5b3 = L.marker(
+                [49.165613, -123.136632],
+                {
+}
+            ).addTo(map_34fee6293976af3e099df813a1a25375);
+        
+    
+            var icon_be3d721d643990b1eb9e06c4ca02b413 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "exclamation",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_bcf67340860609f6cf71e1ca52c650cf = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_a33588bb1733536b909e40441037de81 = $(`<div id="html_a33588bb1733536b909e40441037de81" style="width: 100.0%; height: 100.0%;">     <div style="font-family: Arial; width: 250px;">         <h4 style="margin: 5px 0; color: #d32f2f;">🔴 Hotspot #10</h4>         <hr style="margin: 5px 0;">         <p style="margin: 3px 0;"><b>City:</b> Richmond</p>         <p style="margin: 3px 0;"><b>Latitude:</b> <code style="background: #f0f0f0; padding: 2px 5px;">49.16561</code></p>         <p style="margin: 3px 0;"><b>Longitude:</b> <code style="background: #f0f0f0; padding: 2px 5px;">-123.13663</code></p>         <p style="margin: 3px 0;"><b>Crashes:</b> <b style="color: red;">1,090</b></p>     </div>     </div>`)[0];
+                popup_bcf67340860609f6cf71e1ca52c650cf.setContent(html_a33588bb1733536b909e40441037de81);
+            
+        
+
+        marker_3545edbb36ab6b79b943be9cd89cc5b3.bindPopup(popup_bcf67340860609f6cf71e1ca52c650cf)
+        ;
+
+        
+    
+    
+            marker_3545edbb36ab6b79b943be9cd89cc5b3.bindTooltip(
+                `<div>
+                     #10: Richmond - 1090 crashes
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_3545edbb36ab6b79b943be9cd89cc5b3.setIcon(icon_be3d721d643990b1eb9e06c4ca02b413);
+            
+    
+            var marker_cb1d4aad3ecc918d74c19e02cdb36af5 = L.marker(
+                [49.104433, -122.801032],
+                {
+}
+            ).addTo(map_34fee6293976af3e099df813a1a25375);
+        
+    
+            var icon_d5c206ccb47f3f6a3c97756c9c9ab5f8 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "exclamation",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_11e37cb58994f5dbf9fb486c22ee684c = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_1b05df33f0c09d8a7a12b9338ac6211e = $(`<div id="html_1b05df33f0c09d8a7a12b9338ac6211e" style="width: 100.0%; height: 100.0%;">     <div style="font-family: Arial; width: 250px;">         <h4 style="margin: 5px 0; color: #d32f2f;">🔴 Hotspot #11</h4>         <hr style="margin: 5px 0;">         <p style="margin: 3px 0;"><b>City:</b> Surrey</p>         <p style="margin: 3px 0;"><b>Latitude:</b> <code style="background: #f0f0f0; padding: 2px 5px;">49.10443</code></p>         <p style="margin: 3px 0;"><b>Longitude:</b> <code style="background: #f0f0f0; padding: 2px 5px;">-122.80103</code></p>         <p style="margin: 3px 0;"><b>Crashes:</b> <b style="color: red;">1,039</b></p>     </div>     </div>`)[0];
+                popup_11e37cb58994f5dbf9fb486c22ee684c.setContent(html_1b05df33f0c09d8a7a12b9338ac6211e);
+            
+        
+
+        marker_cb1d4aad3ecc918d74c19e02cdb36af5.bindPopup(popup_11e37cb58994f5dbf9fb486c22ee684c)
+        ;
+
+        
+    
+    
+            marker_cb1d4aad3ecc918d74c19e02cdb36af5.bindTooltip(
+                `<div>
+                     #11: Surrey - 1039 crashes
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_cb1d4aad3ecc918d74c19e02cdb36af5.setIcon(icon_d5c206ccb47f3f6a3c97756c9c9ab5f8);
+            
+    
+            var marker_f41b59cda600c1989c8fd6bb00df2a6a = L.marker(
+                [49.162742, -122.845798],
+                {
+}
+            ).addTo(map_34fee6293976af3e099df813a1a25375);
+        
+    
+            var icon_467a85d9751f4cf620b4d81de1b55f9c = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "exclamation",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_637e628177adea2aa2d64455eb2bde09 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_6dba4536209eba900d78f064c7f5f9aa = $(`<div id="html_6dba4536209eba900d78f064c7f5f9aa" style="width: 100.0%; height: 100.0%;">     <div style="font-family: Arial; width: 250px;">         <h4 style="margin: 5px 0; color: #d32f2f;">🔴 Hotspot #12</h4>         <hr style="margin: 5px 0;">         <p style="margin: 3px 0;"><b>City:</b> Surrey</p>         <p style="margin: 3px 0;"><b>Latitude:</b> <code style="background: #f0f0f0; padding: 2px 5px;">49.16274</code></p>         <p style="margin: 3px 0;"><b>Longitude:</b> <code style="background: #f0f0f0; padding: 2px 5px;">-122.84580</code></p>         <p style="margin: 3px 0;"><b>Crashes:</b> <b style="color: red;">1,028</b></p>     </div>     </div>`)[0];
+                popup_637e628177adea2aa2d64455eb2bde09.setContent(html_6dba4536209eba900d78f064c7f5f9aa);
+            
+        
+
+        marker_f41b59cda600c1989c8fd6bb00df2a6a.bindPopup(popup_637e628177adea2aa2d64455eb2bde09)
+        ;
+
+        
+    
+    
+            marker_f41b59cda600c1989c8fd6bb00df2a6a.bindTooltip(
+                `<div>
+                     #12: Surrey - 1028 crashes
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_f41b59cda600c1989c8fd6bb00df2a6a.setIcon(icon_467a85d9751f4cf620b4d81de1b55f9c);
+            
+    
+            var marker_f81a4414194b05868fae7eaea213b227 = L.marker(
+                [49.190089, -122.800995],
+                {
+}
+            ).addTo(map_34fee6293976af3e099df813a1a25375);
+        
+    
+            var icon_6a5ccdd19b4ff5aac28f430151717fe5 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "exclamation",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_42b264a05addf51b84ec0742d0c5d0b8 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_769973fc693d29628860fe02a49a0253 = $(`<div id="html_769973fc693d29628860fe02a49a0253" style="width: 100.0%; height: 100.0%;">     <div style="font-family: Arial; width: 250px;">         <h4 style="margin: 5px 0; color: #d32f2f;">🔴 Hotspot #13</h4>         <hr style="margin: 5px 0;">         <p style="margin: 3px 0;"><b>City:</b> Surrey</p>         <p style="margin: 3px 0;"><b>Latitude:</b> <code style="background: #f0f0f0; padding: 2px 5px;">49.19009</code></p>         <p style="margin: 3px 0;"><b>Longitude:</b> <code style="background: #f0f0f0; padding: 2px 5px;">-122.80100</code></p>         <p style="margin: 3px 0;"><b>Crashes:</b> <b style="color: red;">1,004</b></p>     </div>     </div>`)[0];
+                popup_42b264a05addf51b84ec0742d0c5d0b8.setContent(html_769973fc693d29628860fe02a49a0253);
+            
+        
+
+        marker_f81a4414194b05868fae7eaea213b227.bindPopup(popup_42b264a05addf51b84ec0742d0c5d0b8)
+        ;
+
+        
+    
+    
+            marker_f81a4414194b05868fae7eaea213b227.bindTooltip(
+                `<div>
+                     #13: Surrey - 1004 crashes
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_f81a4414194b05868fae7eaea213b227.setIcon(icon_6a5ccdd19b4ff5aac28f430151717fe5);
+            
+    
+            var marker_65a0753d9fe514516af4a03d4c0d1557 = L.marker(
+                [49.277018, -122.800008],
+                {
+}
+            ).addTo(map_34fee6293976af3e099df813a1a25375);
+        
+    
+            var icon_1c04b7ab3cd719006c4bc4a635c58003 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "orange",
+  "iconColor": "white",
+  "icon": "exclamation",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_62a39dc4a0ad74c8af2d851a1effaa0b = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_ccd68c46cbc938c6276cb918fc6951fe = $(`<div id="html_ccd68c46cbc938c6276cb918fc6951fe" style="width: 100.0%; height: 100.0%;">     <div style="font-family: Arial; width: 250px;">         <h4 style="margin: 5px 0; color: #d32f2f;">🔴 Hotspot #14</h4>         <hr style="margin: 5px 0;">         <p style="margin: 3px 0;"><b>City:</b> Coquitlam</p>         <p style="margin: 3px 0;"><b>Latitude:</b> <code style="background: #f0f0f0; padding: 2px 5px;">49.27702</code></p>         <p style="margin: 3px 0;"><b>Longitude:</b> <code style="background: #f0f0f0; padding: 2px 5px;">-122.80001</code></p>         <p style="margin: 3px 0;"><b>Crashes:</b> <b style="color: red;">989</b></p>     </div>     </div>`)[0];
+                popup_62a39dc4a0ad74c8af2d851a1effaa0b.setContent(html_ccd68c46cbc938c6276cb918fc6951fe);
+            
+        
+
+        marker_65a0753d9fe514516af4a03d4c0d1557.bindPopup(popup_62a39dc4a0ad74c8af2d851a1effaa0b)
+        ;
+
+        
+    
+    
+            marker_65a0753d9fe514516af4a03d4c0d1557.bindTooltip(
+                `<div>
+                     #14: Coquitlam - 989 crashes
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_65a0753d9fe514516af4a03d4c0d1557.setIcon(icon_1c04b7ab3cd719006c4bc4a635c58003);
+            
+    
+            var marker_ad32ff8a07caf5ac7245b50e9e4923f6 = L.marker(
+                [49.192014, -123.122024],
+                {
+}
+            ).addTo(map_34fee6293976af3e099df813a1a25375);
+        
+    
+            var icon_318f3c00782abcc3b634539b07e74e8d = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "orange",
+  "iconColor": "white",
+  "icon": "exclamation",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_08ab9adc7e2a8e5997f3a3ba8f88d2b6 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_dd62caed45a4df3f80ca3d877481496c = $(`<div id="html_dd62caed45a4df3f80ca3d877481496c" style="width: 100.0%; height: 100.0%;">     <div style="font-family: Arial; width: 250px;">         <h4 style="margin: 5px 0; color: #d32f2f;">🔴 Hotspot #15</h4>         <hr style="margin: 5px 0;">         <p style="margin: 3px 0;"><b>City:</b> Richmond</p>         <p style="margin: 3px 0;"><b>Latitude:</b> <code style="background: #f0f0f0; padding: 2px 5px;">49.19201</code></p>         <p style="margin: 3px 0;"><b>Longitude:</b> <code style="background: #f0f0f0; padding: 2px 5px;">-123.12202</code></p>         <p style="margin: 3px 0;"><b>Crashes:</b> <b style="color: red;">982</b></p>     </div>     </div>`)[0];
+                popup_08ab9adc7e2a8e5997f3a3ba8f88d2b6.setContent(html_dd62caed45a4df3f80ca3d877481496c);
+            
+        
+
+        marker_ad32ff8a07caf5ac7245b50e9e4923f6.bindPopup(popup_08ab9adc7e2a8e5997f3a3ba8f88d2b6)
+        ;
+
+        
+    
+    
+            marker_ad32ff8a07caf5ac7245b50e9e4923f6.bindTooltip(
+                `<div>
+                     #15: Richmond - 982 crashes
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_ad32ff8a07caf5ac7245b50e9e4923f6.setIcon(icon_318f3c00782abcc3b634539b07e74e8d);
+            
+    
+            var marker_015339bcb19c96065fa3c794d912a64c = L.marker(
+                [49.140852, -122.845634],
+                {
+}
+            ).addTo(map_34fee6293976af3e099df813a1a25375);
+        
+    
+            var icon_4f4c69b4df98dbcfaa7ab5275298f866 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "orange",
+  "iconColor": "white",
+  "icon": "exclamation",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_dcfbd80183976f6c8ddd5f31d14beca0 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_02d52b65eae4f5aecc393968dd4735c0 = $(`<div id="html_02d52b65eae4f5aecc393968dd4735c0" style="width: 100.0%; height: 100.0%;">     <div style="font-family: Arial; width: 250px;">         <h4 style="margin: 5px 0; color: #d32f2f;">🔴 Hotspot #16</h4>         <hr style="margin: 5px 0;">         <p style="margin: 3px 0;"><b>City:</b> Surrey</p>         <p style="margin: 3px 0;"><b>Latitude:</b> <code style="background: #f0f0f0; padding: 2px 5px;">49.14085</code></p>         <p style="margin: 3px 0;"><b>Longitude:</b> <code style="background: #f0f0f0; padding: 2px 5px;">-122.84563</code></p>         <p style="margin: 3px 0;"><b>Crashes:</b> <b style="color: red;">982</b></p>     </div>     </div>`)[0];
+                popup_dcfbd80183976f6c8ddd5f31d14beca0.setContent(html_02d52b65eae4f5aecc393968dd4735c0);
+            
+        
+
+        marker_015339bcb19c96065fa3c794d912a64c.bindPopup(popup_dcfbd80183976f6c8ddd5f31d14beca0)
+        ;
+
+        
+    
+    
+            marker_015339bcb19c96065fa3c794d912a64c.bindTooltip(
+                `<div>
+                     #16: Surrey - 982 crashes
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_015339bcb19c96065fa3c794d912a64c.setIcon(icon_4f4c69b4df98dbcfaa7ab5275298f866);
+            
+    
+            var marker_01d835a444a4d31a3f36efadd3bdde0d = L.marker(
+                [49.276261, -122.797294],
+                {
+}
+            ).addTo(map_34fee6293976af3e099df813a1a25375);
+        
+    
+            var icon_ccee8efcf02313f7b519615b686b1836 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "orange",
+  "iconColor": "white",
+  "icon": "exclamation",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_38571faa5be94e33c9ac836700e95b96 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_25349e03ea3061fe10a274b4fb321954 = $(`<div id="html_25349e03ea3061fe10a274b4fb321954" style="width: 100.0%; height: 100.0%;">     <div style="font-family: Arial; width: 250px;">         <h4 style="margin: 5px 0; color: #d32f2f;">🔴 Hotspot #17</h4>         <hr style="margin: 5px 0;">         <p style="margin: 3px 0;"><b>City:</b> Coquitlam</p>         <p style="margin: 3px 0;"><b>Latitude:</b> <code style="background: #f0f0f0; padding: 2px 5px;">49.27626</code></p>         <p style="margin: 3px 0;"><b>Longitude:</b> <code style="background: #f0f0f0; padding: 2px 5px;">-122.79729</code></p>         <p style="margin: 3px 0;"><b>Crashes:</b> <b style="color: red;">949</b></p>     </div>     </div>`)[0];
+                popup_38571faa5be94e33c9ac836700e95b96.setContent(html_25349e03ea3061fe10a274b4fb321954);
+            
+        
+
+        marker_01d835a444a4d31a3f36efadd3bdde0d.bindPopup(popup_38571faa5be94e33c9ac836700e95b96)
+        ;
+
+        
+    
+    
+            marker_01d835a444a4d31a3f36efadd3bdde0d.bindTooltip(
+                `<div>
+                     #17: Coquitlam - 949 crashes
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_01d835a444a4d31a3f36efadd3bdde0d.setIcon(icon_ccee8efcf02313f7b519615b686b1836);
+            
+    
+            var marker_805647a640d405752ccd82768c481036 = L.marker(
+                [49.32717, -123.134922],
+                {
+}
+            ).addTo(map_34fee6293976af3e099df813a1a25375);
+        
+    
+            var icon_41a205d32a0be9264bedac8bc170137d = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "orange",
+  "iconColor": "white",
+  "icon": "exclamation",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_996001319994c8d6e416511d0d0ff3f4 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_ce911dc81fdaa9b1c530b7673773d50d = $(`<div id="html_ce911dc81fdaa9b1c530b7673773d50d" style="width: 100.0%; height: 100.0%;">     <div style="font-family: Arial; width: 250px;">         <h4 style="margin: 5px 0; color: #d32f2f;">🔴 Hotspot #18</h4>         <hr style="margin: 5px 0;">         <p style="margin: 3px 0;"><b>City:</b> West Vancouver</p>         <p style="margin: 3px 0;"><b>Latitude:</b> <code style="background: #f0f0f0; padding: 2px 5px;">49.32717</code></p>         <p style="margin: 3px 0;"><b>Longitude:</b> <code style="background: #f0f0f0; padding: 2px 5px;">-123.13492</code></p>         <p style="margin: 3px 0;"><b>Crashes:</b> <b style="color: red;">925</b></p>     </div>     </div>`)[0];
+                popup_996001319994c8d6e416511d0d0ff3f4.setContent(html_ce911dc81fdaa9b1c530b7673773d50d);
+            
+        
+
+        marker_805647a640d405752ccd82768c481036.bindPopup(popup_996001319994c8d6e416511d0d0ff3f4)
+        ;
+
+        
+    
+    
+            marker_805647a640d405752ccd82768c481036.bindTooltip(
+                `<div>
+                     #18: West Vancouver - 925 crashes
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_805647a640d405752ccd82768c481036.setIcon(icon_41a205d32a0be9264bedac8bc170137d);
+            
+    
+            var marker_305b530ef224ce74122a866f15dfd556 = L.marker(
+                [49.1486, -122.890378],
+                {
+}
+            ).addTo(map_34fee6293976af3e099df813a1a25375);
+        
+    
+            var icon_a3d1ad44efcf4b63b6b6c96acc9576ef = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "orange",
+  "iconColor": "white",
+  "icon": "exclamation",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_8c36d0f7b20657038af46249db5d0ef8 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_ba9eb005a4bc19ed0301b505cd4b5daa = $(`<div id="html_ba9eb005a4bc19ed0301b505cd4b5daa" style="width: 100.0%; height: 100.0%;">     <div style="font-family: Arial; width: 250px;">         <h4 style="margin: 5px 0; color: #d32f2f;">🔴 Hotspot #19</h4>         <hr style="margin: 5px 0;">         <p style="margin: 3px 0;"><b>City:</b> Surrey</p>         <p style="margin: 3px 0;"><b>Latitude:</b> <code style="background: #f0f0f0; padding: 2px 5px;">49.14860</code></p>         <p style="margin: 3px 0;"><b>Longitude:</b> <code style="background: #f0f0f0; padding: 2px 5px;">-122.89038</code></p>         <p style="margin: 3px 0;"><b>Crashes:</b> <b style="color: red;">866</b></p>     </div>     </div>`)[0];
+                popup_8c36d0f7b20657038af46249db5d0ef8.setContent(html_ba9eb005a4bc19ed0301b505cd4b5daa);
+            
+        
+
+        marker_305b530ef224ce74122a866f15dfd556.bindPopup(popup_8c36d0f7b20657038af46249db5d0ef8)
+        ;
+
+        
+    
+    
+            marker_305b530ef224ce74122a866f15dfd556.bindTooltip(
+                `<div>
+                     #19: Surrey - 866 crashes
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_305b530ef224ce74122a866f15dfd556.setIcon(icon_a3d1ad44efcf4b63b6b6c96acc9576ef);
+            
+    
+            var marker_a9676f706e71c6094f8cb7a9944083bf = L.marker(
+                [49.166096, -122.801369],
+                {
+}
+            ).addTo(map_34fee6293976af3e099df813a1a25375);
+        
+    
+            var icon_cc62d85c8381e4c9c297918b849e6646 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "orange",
+  "iconColor": "white",
+  "icon": "exclamation",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_3bddbe9addcaf14166bb8fd46932b0ff = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_209facd73012c40299eb22ae5c0ebce1 = $(`<div id="html_209facd73012c40299eb22ae5c0ebce1" style="width: 100.0%; height: 100.0%;">     <div style="font-family: Arial; width: 250px;">         <h4 style="margin: 5px 0; color: #d32f2f;">🔴 Hotspot #20</h4>         <hr style="margin: 5px 0;">         <p style="margin: 3px 0;"><b>City:</b> Surrey</p>         <p style="margin: 3px 0;"><b>Latitude:</b> <code style="background: #f0f0f0; padding: 2px 5px;">49.16610</code></p>         <p style="margin: 3px 0;"><b>Longitude:</b> <code style="background: #f0f0f0; padding: 2px 5px;">-122.80137</code></p>         <p style="margin: 3px 0;"><b>Crashes:</b> <b style="color: red;">857</b></p>     </div>     </div>`)[0];
+                popup_3bddbe9addcaf14166bb8fd46932b0ff.setContent(html_209facd73012c40299eb22ae5c0ebce1);
+            
+        
+
+        marker_a9676f706e71c6094f8cb7a9944083bf.bindPopup(popup_3bddbe9addcaf14166bb8fd46932b0ff)
+        ;
+
+        
+    
+    
+            marker_a9676f706e71c6094f8cb7a9944083bf.bindTooltip(
+                `<div>
+                     #20: Surrey - 857 crashes
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_a9676f706e71c6094f8cb7a9944083bf.setIcon(icon_cc62d85c8381e4c9c297918b849e6646);
+            
+    
+            var layer_control_dc7ad44b176480028741c70955e3f7ec_layers = {
+                base_layers : {
+                    "openstreetmap" : tile_layer_d58f736f8948654931ffc1d5ed6ba883,
+                },
+                overlays :  {
+                },
+            };
+            let layer_control_dc7ad44b176480028741c70955e3f7ec = L.control.layers(
+                layer_control_dc7ad44b176480028741c70955e3f7ec_layers.base_layers,
+                layer_control_dc7ad44b176480028741c70955e3f7ec_layers.overlays,
+                {
+  "position": "topright",
+  "collapsed": true,
+  "autoZIndex": true,
+}
+            ).addTo(map_34fee6293976af3e099df813a1a25375);
+
+        
+</script>
+</html>
